@@ -1,0 +1,91 @@
+{
+  "template": "contrat_remplacement",
+  "description": "Contrat de remplacement en exercice libéral (art. R.4127-65 et R.4127-91 CSP)",
+  "fields": {
+    "CABINET_NOM": {
+      "type": "string",
+      "required": true,
+      "description": "Nom du cabinet"
+    },
+    "CABINET_ADRESSE": {
+      "type": "string",
+      "required": true,
+      "description": "Adresse du cabinet"
+    },
+    "CABINET_CODE_POSTAL": {
+      "type": "string",
+      "required": true,
+      "description": "Code postal du cabinet"
+    },
+    "CABINET_VILLE": {
+      "type": "string",
+      "required": true,
+      "description": "Ville du cabinet"
+    },
+    "MEDECIN_PRENOM": {
+      "type": "string",
+      "required": true,
+      "description": "Prénom du médecin"
+    },
+    "MEDECIN_NOM": {
+      "type": "string",
+      "required": true,
+      "description": "Nom du médecin"
+    },
+    "MEDECIN_RRPS": {
+      "type": "string",
+      "required": true,
+      "description": "Numéro RRPS du médecin"
+    },
+    "MEDECIN_SEXE": {
+      "type": "string",
+      "required": true,
+      "description": "Sexe du médecin"
+    },
+    "MEDECIN_THESE": {
+      "type": "string",
+      "required": true,
+      "description": "Statut thésé du médecin (oui/non)"
+    },
+    "ANNONCE_ID": {
+      "type": "string",
+      "required": true,
+      "description": "Identifiant de l'annonce"
+    },
+    "CANDIDATURE_ID": {
+      "type": "string",
+      "required": true,
+      "description": "Identifiant de la candidature"
+    },
+    "CABINET_MEDECIN_ID": {
+      "type": "string",
+      "required": true,
+      "description": "Identifiant cabinet-medecin"
+    },
+    "STATUT_CONTRAT_REMPLACEMENT": {
+      "type": "string",
+      "required": true,
+      "description": "Statut du contrat de remplacement"
+    },
+    "JOURS_REMPLACEMENT": {
+      "type": "string",
+      "required": true,
+      "description": "Jours de remplacement (ex: lundi, mardi, jeudi)"
+    },
+    "TAUX_RETROCESSION": {
+      "type": "string",
+      "required": true,
+      "description": "Taux de rétrocession des honoraires en % (ex: 70)"
+    },
+    "DATE_SIGNATURE_CABINET": {
+      "type": "string",
+      "required": true,
+      "description": "Date de signature par le médecin remplacé (ex: 14/04/2026)"
+    },
+    "IP_SIGNATURE": {
+      "type": "string",
+      "required": false,
+      "description": "Adresse IP lors de la signature électronique (traçabilité)"
+    }
+  }
+}

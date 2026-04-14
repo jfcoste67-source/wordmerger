@@ -1,0 +1,16 @@
+[Unit]
+Description=WordMerger API (FastAPI)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/wordmerger
+ExecStart=/opt/wordmerger/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8002 --workers 2
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=/opt/wordmerger/.env
+
+[Install]
+WantedBy=multi-user.target
