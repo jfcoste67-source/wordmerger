@@ -7,6 +7,7 @@ from fastapi.security import APIKeyHeader
 
 from app.merger import get_available_templates, merge
 from app.models import MergeRequest
+from app.schema import get_allowed_fields, get_required_fields
 
 load_dotenv()
 
@@ -25,9 +26,25 @@ app = FastAPI(
 )
 
 
+FIELD_ALIASES = {
+    "MEDECIN_REMPMACE_CABINET_ADRESSE": "MEDECIN_REMPLACE_CABINET_ADRESSE",
+    "MEDECIN_REMPMACE_CABINET_CODE_POSTAL": "MEDECIN_REMPLACE_CABINET_CODE_POSTAL",
+    "MEDECIN_REMPMACE_CABINET_VILLE": "MEDECIN_REMPLACE_CABINET_VILLE",
+}
+
+
 def _verify_key(key: str = Security(api_key_header)) -> None:
     if not key or key != _API_KEY:
         raise HTTPException(status_code=401, detail="Invalid or missing API key")
+
+
+def _normalize_fields_with_aliases(fields: dict) -> dict[str, object]:
+    normalized = {k.upper(): v for k, v in fields.items()}
+    for alias, canonical in FIELD_ALIASES.items():
+        if alias in normalized and canonical not in normalized:
+            normalized[canonical] = normalized[alias]
+        normalized.pop(alias, None)
+    return normalized
 
 
 @app.get("/health")
@@ -42,8 +59,38 @@ def list_templates() -> dict:
 
 @app.post("/api/contracts/merge", dependencies=[Depends(_verify_key)])
 def merge_contract(request: MergeRequest) -> Response:
+    normalized_fields = _normalize_fields_with_aliases(request.fields)
+
     try:
-        docx_bytes = merge(request.template, request.fields)
+        allowed = get_allowed_fields(request.template)
+        required = get_required_fields(request.template)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
+    unknown = sorted([k for k in normalized_fields.keys() if k not in allowed])
+    if unknown:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "error": "Unknown fields in payload",
+                "fields": unknown,
+            },
+        )
+
+    missing = sorted([k for k in required if k not in normalized_fields])
+    if missing:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "error": "Missing required fields",
+                "fields": missing,
+            },
+        )
+
+    try:
+        docx_bytes = merge(request.template, normalized_fields)
     except FileNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc))
     except Exception as exc:

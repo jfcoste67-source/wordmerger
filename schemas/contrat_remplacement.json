@@ -1,51 +1,96 @@
 {
   "template": "contrat_remplacement",
-  "description": "Contrat de remplacement en exercice libéral (art. R.4127-65 et R.4127-91 CSP)",
+  "description": "Contrat de remplacement en exercice libéral (art. R.4127-65 et R.4127-91 CSP) - champs explicites remplaçant/remplacé",
   "fields": {
-    "CABINET_NOM": {
+    "MEDECIN_REMPLACANT_PRENOM": {
       "type": "string",
       "required": true,
-      "description": "Nom du cabinet"
+      "description": "Prénom du médecin remplaçant"
     },
-    "CABINET_ADRESSE": {
+    "MEDECIN_REMPLACANT_NOM": {
       "type": "string",
       "required": true,
-      "description": "Adresse du cabinet"
+      "description": "Nom du médecin remplaçant"
     },
-    "CABINET_CODE_POSTAL": {
+    "MEDECIN_REMPLACANT_RRPS": {
       "type": "string",
       "required": true,
-      "description": "Code postal du cabinet"
+      "description": "Numéro RRPS du médecin remplaçant"
     },
-    "CABINET_VILLE": {
+    "MEDECIN_REMPLACANT_SEXE": {
       "type": "string",
       "required": true,
-      "description": "Ville du cabinet"
+      "description": "Sexe du médecin remplaçant"
     },
-    "MEDECIN_PRENOM": {
+    "MEDECIN_REMPLACANT_THESE": {
       "type": "string",
       "required": true,
-      "description": "Prénom du médecin"
+      "description": "Statut thésé du médecin remplaçant (oui/non)"
     },
-    "MEDECIN_NOM": {
+    "MEDECIN_REMPLACANT_ADRESSE": {
       "type": "string",
       "required": true,
-      "description": "Nom du médecin"
+      "description": "Adresse du médecin remplaçant"
     },
-    "MEDECIN_RRPS": {
+    "MEDECIN_REMPLACANT_CODE_POSTAL": {
       "type": "string",
       "required": true,
-      "description": "Numéro RRPS du médecin"
+      "description": "Code postal du médecin remplaçant"
     },
-    "MEDECIN_SEXE": {
+    "MEDECIN_REMPLACANT_VILLE": {
       "type": "string",
       "required": true,
-      "description": "Sexe du médecin"
+      "description": "Ville du médecin remplaçant"
     },
-    "MEDECIN_THESE": {
+    "MEDECIN_REMPLACE_CABINET_NOM": {
       "type": "string",
       "required": true,
-      "description": "Statut thésé du médecin (oui/non)"
+      "description": "Nom du cabinet du médecin remplacé"
+    },
+    "MEDECIN_REMPLACE_CABINET_ADRESSE": {
+      "type": "string",
+      "required": true,
+      "description": "Adresse du cabinet du médecin remplacé"
+    },
+    "MEDECIN_REMPMACE_CABINET_ADRESSE": {
+      "type": "string",
+      "required": false,
+      "description": "Alias accepté de MEDECIN_REMPLACE_CABINET_ADRESSE"
+    },
+    "MEDECIN_REMPLACE_CABINET_CODE_POSTAL": {
+      "type": "string",
+      "required": true,
+      "description": "Code postal du cabinet du médecin remplacé"
+    },
+    "MEDECIN_REMPMACE_CABINET_CODE_POSTAL": {
+      "type": "string",
+      "required": false,
+      "description": "Alias accepté de MEDECIN_REMPLACE_CABINET_CODE_POSTAL"
+    },
+    "MEDECIN_REMPLACE_CABINET_VILLE": {
+      "type": "string",
+      "required": true,
+      "description": "Ville du cabinet du médecin remplacé"
+    },
+    "MEDECIN_REMPMACE_CABINET_VILLE": {
+      "type": "string",
+      "required": false,
+      "description": "Alias accepté de MEDECIN_REMPLACE_CABINET_VILLE"
+    },
+    "MEDECIN_REMPLACE_NOM": {
+      "type": "string",
+      "required": false,
+      "description": "Nom du médecin remplacé (optionnel)"
+    },
+    "MEDECIN_REMPLACE_PRENOM": {
+      "type": "string",
+      "required": false,
+      "description": "Prénom du médecin remplacé (optionnel)"
+    },
+    "MEDECIN_REMPLACE_RRPS": {
+      "type": "string",
+      "required": true,
+      "description": "Numéro RRPS du médecin remplacé"
     },
     "ANNONCE_ID": {
       "type": "string",
@@ -62,15 +107,30 @@
       "required": true,
       "description": "Identifiant cabinet-medecin"
     },
+    "CABINET_SIRET": {
+      "type": "string",
+      "required": false,
+      "description": "Numéro SIRET du cabinet"
+    },
     "STATUT_CONTRAT_REMPLACEMENT": {
       "type": "string",
       "required": true,
       "description": "Statut du contrat de remplacement"
     },
     "JOURS_REMPLACEMENT": {
+      "type": "array",
+      "required": true,
+      "description": "Liste des jours de remplacement (ex: [\"Lundi\", \"Mardi\", \"Jeudi\"])"
+    },
+    "DATE_DEBUT_REMPLACEMENT": {
       "type": "string",
       "required": true,
-      "description": "Jours de remplacement (ex: lundi, mardi, jeudi)"
+      "description": "Date de début de remplacement (ex: 2026-04-20)"
+    },
+    "DATE_FIN_REMPLACEMENT": {
+      "type": "string",
+      "required": true,
+      "description": "Date de fin de remplacement (ex: 2026-06-30)"
     },
     "TAUX_RETROCESSION": {
       "type": "string",
