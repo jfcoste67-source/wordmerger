@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.venv-test/
+.env
+*.db
+*.zip
+*.tar.gz
+deploy/*.key
+deploy/*.pem
+logs/
