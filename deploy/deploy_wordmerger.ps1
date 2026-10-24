@@ -75,7 +75,7 @@ try {
     if (Test-Path $artifactPath) {
       Remove-Item $artifactPath -Force
     }
-    & tar -czf $artifactPath app deploy schemas templates requirements.txt
+    & tar -czf $artifactPath app deploy/install.sh deploy/wordmerger.service schemas templates requirements.txt
     if ($LASTEXITCODE -ne 0) {
       throw "Artifact creation failed"
     }
@@ -170,7 +170,7 @@ if [ -d "${REMOTE_BASE}" ]; then
 fi
 
 chmod +x deploy/install.sh
-bash deploy/install.sh
+tr -d '\r' < deploy/install.sh | bash
 
 systemctl is-active "${SERVICE_NAME}"
 
