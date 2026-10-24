@@ -170,7 +170,7 @@ if [ -d "${REMOTE_BASE}" ]; then
 fi
 
 chmod +x deploy/install.sh
-./deploy/install.sh
+bash deploy/install.sh
 
 systemctl is-active "${SERVICE_NAME}"
 
