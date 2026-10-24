@@ -8,6 +8,10 @@ echo "==> Creating install directory..."
 mkdir -p "$INSTALL_DIR/templates"
 mkdir -p "$INSTALL_DIR/schemas"
 
+echo "==> Installing LibreOffice PDF conversion support..."
+apt-get update
+apt-get install -y libreoffice-writer
+
 echo "==> Copying application files..."
 cp -r app "$INSTALL_DIR/"
 cp requirements.txt "$INSTALL_DIR/"

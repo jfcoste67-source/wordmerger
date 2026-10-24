@@ -12,34 +12,39 @@
       "required": true,
       "description": "Nom du médecin remplaçant"
     },
-    "MEDECIN_REMPLACANT_RRPS": {
+    "MEDECIN_REMPLACANT_RPPS": {
       "type": "string",
       "required": true,
-      "description": "Numéro RRPS du médecin remplaçant"
+      "description": "Numéro RPPS du médecin remplaçant"
+    },
+    "MEDECIN_REMPLACANT_RRPS": {
+      "type": "string",
+      "required": false,
+      "description": "Alias historique accepté de MEDECIN_REMPLACANT_RPPS"
     },
     "MEDECIN_REMPLACANT_SEXE": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Sexe du médecin remplaçant"
     },
     "MEDECIN_REMPLACANT_THESE": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Statut thésé du médecin remplaçant (oui/non)"
     },
     "MEDECIN_REMPLACANT_ADRESSE": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Adresse du médecin remplaçant"
     },
     "MEDECIN_REMPLACANT_CODE_POSTAL": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Code postal du médecin remplaçant"
     },
     "MEDECIN_REMPLACANT_VILLE": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Ville du médecin remplaçant"
     },
     "MEDECIN_REMPLACE_CABINET_NOM": {
@@ -79,32 +84,37 @@
     },
     "MEDECIN_REMPLACE_NOM": {
       "type": "string",
-      "required": false,
-      "description": "Nom du médecin remplacé (optionnel)"
+      "required": true,
+      "description": "Nom du médecin remplacé"
     },
     "MEDECIN_REMPLACE_PRENOM": {
       "type": "string",
-      "required": false,
-      "description": "Prénom du médecin remplacé (optionnel)"
+      "required": true,
+      "description": "Prénom du médecin remplacé"
+    },
+    "MEDECIN_REMPLACE_RPPS": {
+      "type": "string",
+      "required": true,
+      "description": "Numéro RPPS du médecin remplacé"
     },
     "MEDECIN_REMPLACE_RRPS": {
       "type": "string",
-      "required": true,
-      "description": "Numéro RRPS du médecin remplacé"
+      "required": false,
+      "description": "Alias historique accepté de MEDECIN_REMPLACE_RPPS"
     },
     "ANNONCE_ID": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Identifiant de l'annonce"
     },
     "CANDIDATURE_ID": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Identifiant de la candidature"
     },
     "CABINET_MEDECIN_ID": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Identifiant cabinet-medecin"
     },
     "CABINET_SIRET": {
@@ -114,13 +124,18 @@
     },
     "STATUT_CONTRAT_REMPLACEMENT": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Statut du contrat de remplacement"
     },
     "JOURS_REMPLACEMENT": {
-      "type": "array",
+      "type": "string",
       "required": true,
-      "description": "Liste des jours de remplacement (ex: [\"Lundi\", \"Mardi\", \"Jeudi\"])"
+      "description": "Nombre de jours calculé à partir des créneaux acceptés (ex: 1,5 jours)"
+    },
+    "CRENEAUX_ACCEPTES": {
+      "type": "array",
+      "required": false,
+      "description": "Créneaux acceptés affichés en puces, un élément par ligne"
     },
     "DATE_DEBUT_REMPLACEMENT": {
       "type": "string",
@@ -132,6 +147,11 @@
       "required": true,
       "description": "Date de fin de remplacement (ex: 2026-06-30)"
     },
+    "DATE_JOUR": {
+      "type": "string",
+      "required": false,
+      "description": "Date de génération en français ; générée automatiquement si omise"
+    },
     "TAUX_RETROCESSION": {
       "type": "string",
       "required": true,
@@ -139,8 +159,23 @@
     },
     "DATE_SIGNATURE_CABINET": {
       "type": "string",
-      "required": true,
+      "required": false,
       "description": "Date de signature par le médecin remplacé (ex: 14/04/2026)"
+    },
+    "TAUX_CABINET": {
+      "type": "string",
+      "required": false,
+      "description": "Part du cabinet en % ; par défaut 100 moins TAUX_RETROCESSION"
+    },
+    "CRENEAUX_LISTE": {
+      "type": "string",
+      "required": false,
+      "description": "Créneaux acceptés (texte ou liste) ; par défaut JOURS_REMPLACEMENT"
+    },
+    "AVERTISSEMENT_PROFIL": {
+      "type": "string",
+      "required": false,
+      "description": "Avertissement explicite ; sinon généré selon MEDECIN_REMPLACANT_THESE (oui/non), avec avertissement si statut absent ou inconnu"
     },
     "IP_SIGNATURE": {
       "type": "string",

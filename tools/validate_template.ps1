@@ -67,7 +67,16 @@ try {
         throw "Cannot read word/document.xml"
     }
 
-    $matches = [regex]::Matches($xml, "\{\{\s*([A-Z0-9_]+)\s*\}\}")
+    $document = New-Object System.Xml.XmlDocument
+    $document.LoadXml($xml)
+    $namespace = New-Object System.Xml.XmlNamespaceManager($document.NameTable)
+    $namespace.AddNamespace("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")
+    $paragraphText = @(
+        $document.SelectNodes("//w:p", $namespace) | ForEach-Object {
+            ($_.SelectNodes(".//w:t", $namespace) | ForEach-Object { $_.InnerText }) -join ""
+        }
+    ) -join "`n"
+    $matches = [regex]::Matches($paragraphText, "\{\{\s*([A-Z0-9_]+)\s*\}\}")
     $placeholders = @($matches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
 
     Write-Host "Placeholders found: $($placeholders.Count)"
